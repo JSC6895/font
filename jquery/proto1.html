@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+<script>
+	function Animal(name){
+		this.name = name
+	}
+	Animal.prototype.run = function(){
+		console.log(this.name + '跑')
+	}
+
+	var dog  = new Animal('狗')
+	dog.run()
+	var cat = new Animal('猫')
+	cat.run()
+</script>
+</body>
+</html>

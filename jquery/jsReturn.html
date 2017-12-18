@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		function A(name){
+			this.name = '是是是';
+			// return 'xxx';
+			return {name:name};
+		}
+
+		var a = A('haha');
+		var b = new A('xxx');
+		console.log(a.name,b.name);//错误的认为b返回的是实例化的对象的name值,其实不然(因为return的是一个字面量对象,如果return是的普通数据类型,则是this.name,a得到的值是undefined)
+		
+	</script>
+</body>
+</html>

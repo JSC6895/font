@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+<script>
+	var obj1 = {
+	name:'Josn',
+	_secret:'private',
+	_toilet:function(){ console.log(this.name + 'swimming')},
+	_love:function(){console.log(this.name + 'shopping')},
+	show:function(){
+		this._toilet()
+		this._love()
+		console.log(this.name + 'hi')
+	}
+}
+function make(name){
+	var secret = '我的密码'
+	var lave = function(){console.log(name + 'playing')}
+	var toilet = function(){console.log(name + 'speaking')}
+	return {
+		name:name,
+		show:function(){
+			toilet()
+			lave()
+			console.log(this.name + 'hi') ;//将对象中函数暴露出去
+		}
+	}
+}
+var obj2 = make('Lion')
+
+console.log(obj1.show(),obj2.show())
+console.log(obj1,obj2)
+		
+		
+</script>
+	
+</body>
+</html>

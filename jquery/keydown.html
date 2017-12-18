@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="./jquery-3.1.1.min.js"></script>
+</head>
+<body>
+	<h3 style="height:30px"></h3>
+	<p><input id="name" type="text" size="80"></p>
+<script>
+	!function($){
+		// var timer
+		// $("#name").keydown(function(){
+		// 	clearTimeout(timer)
+		// 	timer = setTimeout(function(){change()},500)
+		// })
+		$("#name").keydown(function(){
+			clearTimeout(timer)
+			var timer = setTimeout(function(){change()},500)
+		})
+		
+		function change(){
+			var val = $.trim($('#name').val())
+			console.log('发送请求的'+val)
+
+			$('h3').text(val);
+		}
+	}(jQuery)
+</script>
+</body>
+</html>

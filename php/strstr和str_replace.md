@@ -35,3 +35,39 @@ function arrayToStr(...$arr){
 }
 arrayToStr(array(1,23,23,324,));
 ```
+###使用'??运算符
+```php
+//php7.0支持的语法
+$res = $_GET['username']??'nobody';
+```
+###'<=>'比较运算符
+```php
+$c = $a <=>$b;
+/*
+如果$a > $b,$c的值为1
+如果$a = $b,$c的值为0
+如果$a < $b,$c的值为-1
+
+*/
+```
+##php代码优化
+###给定初始值
+```php
+$param = 'one';
+if($num > 1){
+  $param = 'two';
+}
+/*
+else{
+  $param = 'one';
+}
+*/
+```
+###用'&&'替换 'if'
+```php
+if(strlen($newpwd) < 6){ //用isset($newpwd[6])效率更高
+  $message = '密码小于6';
+}
+//可以使用以下代码
+strlen($newpwd) < 6 && $message ="";
+```
