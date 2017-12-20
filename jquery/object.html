@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<!-- 对象作为函数参数传递 -->
+<script>
+	//代码1
+	var point = {left:1,right:2}
+	function change(point){
+		point.left = 3
+	}
+	change(point)
+	console.log(point)
+</script>
+<script>
+	var point = {left:1,right:2}
+	function change(point){
+		point = {left:3,right:5}
+	}
+	change(point)
+	console.log(point)//不会改变实参的值
+
+	var point1 = {left:1,right:2}
+	function change(point){
+		point = {left:3,right:5}
+		return point
+	}
+	var point = change(point1)
+	console.log(point)//会改变实参的值
+</script>
+</body>
+</html>

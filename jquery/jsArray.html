@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+<script>
+	var a = [1,2,3];
+	var b = a.reverse();
+	console.log(a,b);
+
+	var c = [3,4,5];
+	var d = c.concat(b);
+	console.log(c,d);
+
+	var e = [1,12,232,34,222,35];
+	console.log(e.sort(function(a,b){ //如果默认的话会以字符编码顺序排列
+		// var len = e.length;
+		// for(var i = 0;i < len; i++){
+		// 	if(e[i] > e[i+1]){
+		// 		var o = e[i];
+		// 		e[i] = e[i+1];
+		// 		e[i+1] = o;
+		// 		// arr[i] = arr[i+1];
+		// 	}
+		// }
+		return a-b;
+	}));
+</script>
+</body>
+</html>

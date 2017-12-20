@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="./jquery-3.1.1.min.js"></script>
+</head>
+<body>
+
+<script>
+	setTimeout(function(){
+
+			function main(){
+				var str = 'nihao'
+				for(var i = 0; i < 10; i++){
+					str += str
+				}
+
+				return function(){  //如果返回的是一个就不构成闭包,如果返回的是一个函数,且函数里有关联上述的参数
+					return str
+				}
+			}
+
+			for (var i = 0; i <　1000000; i++){
+				$('body').click(main);
+			}
+		},
+		1000
+	)
+</script>
+</body>
+</html>
