@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>H5拖动</title>
+</head>
+<body>
+	
+</body>
+<script>
+	//拖动实现原理
+	$noteHead.on('mousedown',function(e){
+		var evtX = e.pageX - $note.offset().left,//获得鼠标按下（事件）后鼠标坐标距离大div内的小div左边框的距离。offset().left获取左偏移量
+		evtY = de.pageY - $note.offset().top;
+		$note.addClass('draggable').data('evtPos',{x:e})
+	})
+</script>
+</html>
