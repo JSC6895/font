@@ -77,4 +77,55 @@ hQuery.prototype.extend({
 /***
 遗漏的小知识点：代码调试可以用debugger；加断点
 *****/
+/**
+generator示例
+返回的是个对象，value返回值,done表示是否迭代完毕
+
+**/
+var gen = function* (n){
+  for (var i = 0;i < 3; i ++){
+    n ++;
+    yield n
+  }
+}
+var genObj = gen(2)
+
+console.log(genObj.next()) //输出3
+console.log(genObj.next()) //输出4
+console.log(genObj.next()) //输出5
+console.log(genObj.next()) //输出undefined
+//generator演化过程
+request(url,function(err,res.body){
+  if(err) handleError(err)
+  
+  fs.writeFile('1.txt',body,function(err){
+    if (err) handleError(err)
+   	
+    request(url2,function(err,res,body){
+      if (err) handleError(err)
+    })
+  })
+})
+======================================================
+request(url)
+  .then(function(result){
+  return writeFileAsync('1.txt',result)
+})
+  .then(function(result){
+  return request(url2)
+})
+  .catch(function(e){
+  handleError(e)
+})
+=======================================================
+var result = yield request(url)
+yield writeFileAsync('1.txt',result)
+yield request(url2)
+//generator演化过程end
+
+request
+
+/*
+
+*/
 ```
