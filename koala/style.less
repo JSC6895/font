@@ -1,0 +1,120 @@
+/*
+.content
+{
+  ul{
+    list-style:none;
+  }
+
+  li{
+    height: 25px;
+    padding: 15px;
+    a{
+      text-decoration:none;
+      color:#535353;
+    }
+  }
+
+}
+*/
+@import "main";
+.header{
+  width:@wp;
+  h1{
+    font-size:18px;
+
+  }
+
+}
+.foo(@bg:#fff,@color:#f00){
+  background:@bg;
+  color:@color;
+  font-size:13px;
+
+}
+.unimportant{
+  .foo();
+}
+
+.important{
+  .foo() !important
+}
+
+//条件表达式
+.mixin(@a)when(lightness(@a)>=50%){
+  background-color:black;
+}
+
+.mixin(@a)when(lightness(@a)<50%){
+  background-color: white;
+}
+
+.mixin(@a){
+  color:@a;
+}
+
+.class{
+  .mixin(#ddd)
+}
+.class{
+  .mixin(#555)
+}
+
+//循环
+.loop(@couter)when(@couter > 0){
+  h@{couter}{
+    //作为选择器使用
+    padding:10px * @couter;
+  }
+  .loop(@couter - 1);
+}
+
+.content{
+  .loop(6);
+}
+
+//函数
+.body{
+  background:data-uri("1.jpg")
+}
+
+//字符串函数
+.body{
+  d:escape("@,#,(,),$")
+}
+
+.m(@x)when(isnumber(@x)){
+  h1:@x;
+}
+//iscolor、iskeyword
+//判断是否是url
+.m(@x)when(isurl(@x)){
+  h1:@x;
+}
+//
+.m(@x)when(isurl(@x)){
+  h1:@x;
+}
+//判断是否是像素
+.m(@x)when(ispixel(@x)){
+  h1:@x;
+}
+//判断是否em单位的数字
+.m(@x)when(isem(@x)){
+  h1:@x;
+}
+//是否是百分比单位的数字
+.m(@x)when(isprecentage(@x)){
+  h1:@x;
+}
+.div1{
+  .m(123);
+  .m(10%)
+}
+.div2{
+  background:hsva(90,100%,80%,80%)
+  //hsva h->hue（色相） s->saturation(饱和度) v->value(色调) a->alpha(透明度)
+  //hsl l->lightness(亮度)
+}
+.left{
+  background: hsl(255,100%,80%);
+}

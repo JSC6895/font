@@ -1,0 +1,33 @@
+@mixin alert($color:blue){
+  color:$color;
+}
+
+
+.block{
+  margin:10px;
+  padding:5px;
+}
+
+p{
+  @extend .block; //继承父类
+}
+
+
+//全局变量
+$fontsize:12px;
+$fontsize:12px !default;//默认值
+$padding:5px 10px 5px 10px;
+
+$maps:(color:red,borderColor:blue);
+body{
+
+  $color:red !global;//定义一个全局的
+  color:$color;
+  padding: $padding;
+  padding-left:nth($padding,1);
+}
+
+footer{
+  color:$color;
+  background-color:map-get($maps,color);//map-get通过第二个参数（键）得到所对应的值
+}

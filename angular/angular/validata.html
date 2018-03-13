@@ -1,0 +1,95 @@
+<!doctype html>
+<html ng-app="lesson" ng-controller="FormCtrl" >
+  <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>
+	LESSON 7
+  </title>
+  <link rel="stylesheet" type="text/css" href="css/main.css" />
+  <style>
+  #content1{padding:16px;}
+  </style>
+
+  </head>
+
+  <body>
+  
+	<form ng-submit="PostForm()" name="myForm">
+		<ul>
+			<li>
+				<!-- 
+					form在没有name属性时作为对象，有name属性时name作为对象 
+					ng-model删除后不生效，‘myForm.’后面跟的是input的name值
+				-->
+				<!-- <label>用户名：</label><input type="text" ng-model="UserName" name="UserName1" ng-maxlength="18" ng-minlength="8" required/> -->
+				<!-- 字面意思：当数据发生改变时 -->
+				<!-- <b class="notice" ng-show="myForm.UserName1.$dirty && myForm.UserName1.$invalid"> -->
+				<!-- 当触发required错误时会显示 -->
+				<!-- <span ng-show="myForm.UserName1.$error.required">请输入用户名</span> -->
+				<!-- <span>请输入8到18位的用户名</span> -->
+				<!-- </b> -->
+				
+				<!-- reg	 -->
+				<label>用户名：</label><input type="text" ng-model="UserName" name="UserName1" ng-pattern="/^\w{8,18}$/"/>
+				
+				<span ng-show="myForm.UserName1.$dirty && myForm.UserName1.$invalid">
+					<span>请输入8到18位的用户名</span>	
+				</span>
+				</b>
+			</li>
+			<!-- reg验证 -->
+			<li>
+				<label for="">编号</label>
+				<input type="text" name="UserIndex" ng-model="UserIndex" ng-pattern="/^\d+$/">
+				<span style="color:red;" ng-show="myForm.UserIndex.$dirty && myForm.UserIndex.$invalid">
+					请输入数字
+				</span>
+			</li>
+			<li>
+				<input ng-disabled="myForm.$invalid" type="submit" value="提交" />
+			</li>
+		</ul>
+	</form>
+  
+	<ul>
+		<li>{{form.UserName}}</li>
+		<li>{{form.NickName}}</li>
+		<li>{{form.Age}}</li>
+		<li>{{form.IsMarried}}</li>
+		<li>{{form.LovedAnimal}}</li>
+		<li>{{form.LocationCity}}</li>
+	</ul>
+	
+	<script src="scripts/angular-1.4.6.min.js"></script>
+	<script>
+		var app = angular.module("lesson",[]);
+		app.controller("FormCtrl",function($scope){
+			
+			$scope.formInitObj = {
+				UserName:"",
+				NickName:"",
+			};
+			$scope.form = {};
+			
+			$scope.form.LocationCityList = [
+				{text:"北京",value:"北京"},
+				{text:"上海",value:"上海"},
+				{text:"广州",value:"广州"}
+			];
+			
+			$scope.PostForm=function(){
+				if($scope.form.UserName == ""|| $scope.form.UserName == undefined){
+					alert('用户名不能为空');
+					return false;
+				};
+				console.log($scope.form);
+				$scope.form = angular.copy($scope.formInitObj);
+			}
+			
+		});
+		
+
+	</script>
+	
+  </body>
+</html>

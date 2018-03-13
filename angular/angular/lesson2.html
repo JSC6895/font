@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="lesson" ng-controller="lesson2">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<b>{{Now}}</b>
+	<b style="color:blue">{{Week[1]}}</b>
+	<script src="scripts/angular-1.0.1.min.js"></script>
+	<script>
+	var app = angular.module("lesson",[]);
+	app.controller("lesson2",function($scope){
+		var now1 = new Date();
+		$scope.Now = now1.getHours()+":"+now1.getMinutes()+":"+now1.getSeconds();
+
+		$scope.SetTimer = function(){
+			$scope.$apply(function(){
+				console.log($scope.Now);
+				var now = new Date();
+				$scope.Now = now.getHours()+":"+now.getMinutes()+":"+now.getSeconds();
+				console.log($scope.Now);
+			});
+		}
+		$scope.SetTimerInterval = setInterval($scope.SetTimer,1*1000);
+
+
+	});
+	</script>
+</body>
+</html>

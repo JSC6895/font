@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="lesson">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	ul li{
+		list-style: none;
+	}
+	</style>
+</head>
+<body>
+	<div ng-controller="Papa">
+		<ul>
+			<li>{{Name}}</li>
+			<li>{{Location}}</li>
+			<button ng-click="ChangeHouse()">买房</button>
+		</ul>
+		<!-- 继承要将controller包在父控制器中 -->
+		<div ng-controller="Me">
+			<ul>
+				<li>{{Name}}</li>
+				<li>{{Location}}</li>
+				<li>{{Mobile}}</li>
+			</ul>
+		</div>
+
+		<div ng-controller="GF">
+			<ul>
+				<li>{{Name}}</li>
+				<li>{{Mobile}}</li>
+				<li><button ng-click="Call()">Cal</button></li>
+			</ul>
+		</div>
+	</div>
+	<script src="scripts/angular-1.4.6.min.js"></script>
+	<script>
+	var app = angular.module("lesson",[]);
+	app.controller("Papa",function($scope){
+		$scope.Name = 'papa';
+		$scope.Location = "北京西城区";
+		$scope.ChangeHouse = function(){
+			$scope.Location = "南京";
+		}
+		$scope.$on('CallMe',function(){
+			$scope.$broadcast('youGFCall');
+		})
+	});
+	app.controller('Me',function($scope){
+		$scope.Name = "我";
+		$scope.Mobile = "待机";
+		$scope.$on('youGFCall',function(){
+			$scope.Mobile = "GF来电";
+		});
+	});
+	app.controller("GF",function($scope){
+		$scope.Name = "GF";
+		$scope.Mobile = "待机";
+		$scope.Call = function(){
+			$scope.Mobile = "呼叫我";
+			//传递给父类，父类调用方法广播给
+			$scope.$emit('CallMe');
+
+		}
+	});
+	</script>
+</body>
+</html>

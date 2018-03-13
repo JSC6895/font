@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="lesson" ng-controller="lesson3">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	ul li{
+		list-style: none;
+	}
+	</style>
+</head>
+<body>
+<!-- 点击数：<span>{{Counter || 0}}</span><button ng-click="Counter = Counter + 1">点击</button> -->
+点击数：<span>{{Counter}}</span><button ng-click="ngCounter()">点击</button>
+<!-- 显示隐藏 -->
+<div>
+<p ng-show="ContentFlag">文章内容</p><button ng-click="HideContent()">隐藏</button>
+</div>
+<!-- ng-change事件 -->
+<div>
+改变数:<span>{{Counter}}</span><input type="text" ng-change="ngCounter()" ng-model="counterInput">
+</div>
+<!-- ng-keypress事件 键盘按下 -->
+<div>
+改变数:<span>{{Counter}}</span><input type="text" ng-keypress="ngCounter()" ng-model="counterInput1">
+</div>
+<!-- ng-submit -->
+<div>
+	<form action="" ng-submit="SubmitForm()">
+		name:<input type="text" ng-model="Name">
+		age:<input type="text" ng-model="Age">
+		<input type="submit" value="submit">
+	</form>
+</div>
+
+<ul>
+	<li>姓：<input type="text" ng-model="xing"></li>
+	<li>名：<input type="text" ng-model="ming"></li>
+	<li>Hello <b>{{xing || ''}}{{ming || ''}}</b></li>
+	<li>hello <b>{{FullName}}</b></li>
+	<li>hello <b>{{xing}}</b></li>
+	<li>hello <b>{{ming}}</b></li>
+</ul>
+<ul ng-repeat="x in UserNameList">
+	<li>{{x}}</li>
+</ul>
+<table>
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>姓名</th>
+			<th>年龄</th>
+			<th>星座</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="a in UserInfoList | orderBy:'a[1]':false">
+			<td>{{$index + 1}}</td>
+			<td>{{a[0] | uppercase}}</td> 
+			<td>{{a[1]}}</td>
+			<td>{{a[2]}}</td>
+		</tr>
+	</tbody>
+</table>
+<table>
+	<thead>
+		<tr>
+			<th>姓名</th>
+			<th>年龄</th>
+			<th>星座</th>
+			<th>工作年限</th>
+			<th>操作</th>
+		</tr>
+	</thead>
+	<tbody>
+		<!-- <tr ng-repeat="o in Obj1 | orderBy:'age':false"> -->
+		<!-- <tr ng-repeat="o in Obj1 | orderBy:['age','-workyear']"> -->
+	 	<!-- <tr ng-repeat="o in Obj1 | orderBy:['age','-workyear'] | filter:{'age':23}"> -->
+		<!--添加过滤：精准查询 -->
+		<tr ng-repeat="o in Obj1 | orderBy:['age','-workyear'] | filter:'t'"><!--添加过滤：模糊查询-->
+			<td>{{o.name}}</td>
+			<td>{{o.age}}</td>
+			<td>{{o.con}}</td>
+			<td>{{o.workyear}}</td>
+			<td><button ng-click="DeleteUser(o.name)">刪除</button></td>
+		</tr>
+	</tbody>
+</table>
+	<script src="scripts/angular-1.4.6.min.js"></script>
+	<script>
+	var app = angular.module("lesson",[]);
+	app.controller("lesson3",function($scope){
+		$scope.xing = "";
+		$scope.ming = "";
+		$scope.FullName = $scope.xing+$scope.ming;
+		$scope.$watch('xing',function(){
+			$scope.FullName = $scope.xing+$scope.ming;
+		})
+
+		$scope.$watch('ming',function(){
+			$scope.FullName = $scope.xing+$scope.ming;
+		})
+		$scope.UserNameList = ['x','yu','zz'];
+		$scope.UserInfoList = [
+			["Tom",23,"摩羯"],
+			["Jony",24,"摩羯"],
+			["Tom",25,"摩羯"],
+			["Tom",26,"摩羯"],
+			["Tom",20,"摩羯"],
+			["Tom",23,"摩羯"],
+			["Tom",29,"摩羯"],
+			["Tom",21,"摩羯"]
+		];
+		function Student(name,age){
+			var that = this;
+			that.name = name;
+			that.age = age;
+		}
+		$scope.Obj = new Student('wei',24);
+		$scope.Obj1 = [
+			{"name":'tom',"age":22,"con":'haha',"workyear":5},
+			{"name":'tom2',"age":23,"con":'haha',"workyear":1},
+			{"name":'tom3',"age":18,"con":'haha',"workyear":5},
+			{"name":'tom4',"age":20,"con":'haha',"workyear":4},
+			{"name":'tom5',"age":34,"con":'haha',"workyear":4},
+			{"name":'tom6',"age":24,"con":'haha',"workyear":6},
+			{"name":'tom7',"age":19,"con":'haha',"workyear":5},
+			{"name":'tom8',"age":22,"con":'haha',"workyear":7}
+		];
+		$scope.DeleteUser = function(UserName){
+			$scope.Obj1.forEach(function(user,i,list){
+				if(user.name == UserName){
+					list.splice(i,1);
+				}
+			})
+		}
+		$scope.Counter = 0
+		$scope.ngCounter = function(){
+			$scope.Counter = $scope.Counter + 1;
+		}
+
+
+		//显示隐藏
+		$scope.ContentFlag = true;
+		$scope.HideContent = function(){
+			$scope.ContentFlag = !$scope.ContentFlag;
+		};
+		$scope.SubmitForm = function(){
+			var name = $scope.Name;
+			var age = $scope.Age;
+			console.log(
+				{name:name,age:age}
+			)
+			return false;
+		}
+
+	});
+	</script>
+</body>
+</html>

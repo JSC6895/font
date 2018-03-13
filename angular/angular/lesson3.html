@@ -1,0 +1,74 @@
+<!doctype html>
+<html ng-app="lesson" ng-controller="lesson3"   >
+  <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>
+	LESSON 3
+  </title>
+  <link rel="stylesheet" type="text/css" href="css/main.css" />
+  <style>
+  #content1{padding:16px;}
+  </style>
+
+  </head>
+
+  <body>
+  
+  <ul>
+			<li>姓：<input  ng-model="xing" /></li>
+			<li>名：<input  ng-model="ming" /></li>
+			<li>Hello <b >{{xing || ''}} {{ming || ' ' }}</b></li>
+			<li>Hello <b >{{FullName}}</b></li>
+  </ul>
+  
+  <ul >
+	<li ng-repeat="a in UserNameList">{{a}}</li>
+  </ul>
+  <hr />
+  <table>
+	<thead>
+		<tr>
+			<th>姓名</th>
+			<th>年龄</th>
+			<th>星座</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="x in UserInfoList">
+			<td>{{x[0]}}</td>
+			<td>{{x[1]}}</td>
+			<td>{{x[2]}}</td>
+		</tr>
+	</tbody>
+  </table>
+  
+	<script src="scripts/angular-1.0.1.min.js"></script>
+	<script>
+		var app = angular.module("lesson",[]);
+		app.controller("lesson3",function($scope){
+
+			$scope.xing="";
+			$scope.ming="";
+			
+			$scope.FullName = $scope.xing+$scope.ming;
+
+			$scope.$watch("xing",function(){
+				$scope.FullName = $scope.xing+$scope.ming;
+			})
+			$scope.$watch("ming",function(){
+				$scope.FullName = $scope.xing+$scope.ming;
+			})
+			
+			$scope.UserNameList = ["Tom","Jerry","David","Tim"];
+			$scope.UserInfoList =[
+				["Tom",26,"水瓶座"],
+				["Jerry",27,"巨蟹座"],
+				["David",28,"天秤座"],
+				["Tim",39,"摩羯座"]
+			];
+		});
+			
+	</script>
+	
+  </body>
+</html>

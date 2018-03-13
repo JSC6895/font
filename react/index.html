@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./react.development.js"></script>
+    <script src="./react-dom.development.js" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.js" ></script>
+</head>
+<body>
+    <div id="test" class="container"></div>
+
+    <script type="text/babel">
+        //Item
+        const Item = React.createClass({
+            render(){
+                return <li className="list">
+                </li>
+            }
+        });
+        //ItemEditor
+        const ItemEditor = React.createClass({
+            remove(){
+                this.props.onRemove(id);
+            },
+            render(){
+                //this.props.onRemove
+                return <li className="list-group-item">
+                    <input className="item-edit" defaultValue={this.props.value}/>
+                    <a onClick={this.remove}></a>
+                </li>
+            }
+        })
+        const List = React.createClass({
+            getInitialState(){
+                return {
+//                    list:new Set(),
+//                    editList:new Set()
+                    list:new Map(),//要实现删除，就要用到复杂的数据类型
+                    editList:new Map()
+                }
+            },
+            add(){
+                const key = ++this.state.key;
+                this.state.editList.set(key,{value:''});
+                this.forceUpdate();
+            },
+            removeItem(id){
+                this.state.list.delete(id);
+                this.forceUpdate();
+            },
+            removeItemEditor(id){
+                this.state.editList.delete(id);
+                this.forceUpdate();
+            },
+
+            render(){
+                const listDOM = [];
+                const editListDOM = [];
+
+                for(let entity of this.state.list){
+//                    listDOM.push(<Item value={item.value}/>);
+                    listDOM.push(<Item id={entity[0]} key={entity[0]} onRemove={this.removeItem} value={entity[1].value} />);
+                }
+
+                for(let entity of this.state.editList){
+//                    editListDOM.push(<ItemEditor value={item.value}/>)
+                    editListDOM.push(<ItemEditor value={entity[1]}/>)
+                }
+            }
+        });
+        ReactDOM.render(
+                <List />,
+                document.getElementById('test')
+        );
+    </script>
+</body>
+
+</html>

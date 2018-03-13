@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="lesson" ng-controller="MainCtrl">
+<head>
+	<meta charset="UTF-8">
+	<title>点赞</title>
+	<style>
+		ul > li:{
+			list-style: none;
+		}
+	</style>
+</head>
+<body>
+	<p ng-show="IsLoding">订单加载中。。。。</p>
+
+	<div ng-show="!IsLoding">
+		<!-- 工具拦 -->
+		<div>
+			<span>订单编号:</span><input type="text" ng-model="searchOrderId">
+			<button ng-click="searchOrder()">search</button>
+			<button ng-click="DelOrders()">批量删除</button>
+		</div>
+
+		<table>
+			<thead>
+				<th>
+					<td>选中</td>
+					<td>订单编号</td>
+					<td>卖家</td>
+					<td>商品详情</td>
+					<td>物流</td>
+					<td>订单状态</td>
+					<td>下单日期</td>
+					<td>删除</td>
+				</th>
+			</thead>
+			<!-- <tbody ng-repeat="x in orderList | filter:orderFilter"> -->
+			<tbody ng-repeat="x in orderList">
+					<td><input type="checkbox" ng-model="x.selected"></td>
+					<td>{{x.orderid}}</td>
+					<td>{{x.sealer}}</td>
+					<td>
+						<ul ng-repeat="p in x.products">
+							<li>{{p.name}}</li>
+							<li>{{p.description}}</li>
+							<li>{{p.price}}</li>
+						</ul>
+					</td>
+					<td>{{x.traffic}}</td>
+					<td>{{x.status}}</td>
+					<td>{{x.createTime}}</td>
+					<td></td>
+			</tbody>
+		</table>
+	</div>
+	<script src="scripts/angular-1.4.6.min.js"></script>
+	<script>
+	Array.prototype.remove = function(dx){
+		if(isNaN(dx) || dx>this.length){return false;}
+		for(var i=0,n=0;i<this.length;i++){
+			if(this[i] != this[dx]){
+				this[n++] = this[i];
+			}
+		}
+		this.length -= 1;
+	};
+	var app = angular.module("lesson",[]);
+	app.controller('MainCtrl',function($scope){
+
+		$scope.orderListBase = [
+			{
+				orderid:"DDDS12321321",
+				createTime:'2018年2月8日 22:19:23',
+				sealer:'专营店',
+				traffic:'快递已取件',
+				status:'卖家已发货',
+				products:[
+					{
+						name:'黑色夹克衫',
+						description:'质量好',
+						price:200.00,
+						oldprice:300.00,
+						amount:1,
+						payment:200.00					
+					}
+				]
+			},
+			{
+				orderid:"DDDS12321322",
+				createTime:'2018年2月8日 22:19:23',
+				sealer:'专营店',
+				traffic:'快递已取件',
+				status:'卖家已发货',
+				products:[
+					{
+						name:'黑色夹克衫',
+						description:'质量好',
+						price:200.00,
+						oldprice:300.00,
+						amount:1,
+						payment:200.00					
+					}
+				]
+			}
+		];
+		$scope.orderList =[];
+		//加载订单方法
+		$scope.IsLoding = false;
+		$scope.LoadOrderList = function(accountId,pageSize,pageIndex){
+			$scope.IsLoding = true;
+			$scope.orderList = $scope.orderListBase;
+			$scope.IsLoding = false;
+		}
+
+		$scope.orderFilter = function(order){
+			if($scope.searchOrderId != ''){
+				return order.orderid.indexOf($scope.searchOrderId) >= 0;
+			}
+		}
+		$scope.searchOrder = function(){
+			var searchOrdeList = [];
+			
+			for(var i in $scope.orderList){
+
+				if($scope.orderList[i].orderid.indexOf($scope.searchOrderId) >=0){
+					searchOrdeList.push($scope.orderList[i]);
+				}
+			}
+			$scope.orderList = searchOrdeList;
+		}
+		$scope.DelOrders = function(){
+			for(var i = $scope.orderList.length - 1;i >= 0;i--){
+				if($scope.orderList[i].selected){
+
+					$scope.orderList.remove(i);
+				}
+			}
+		}
+		$scope.LoadOrderList();
+	});
+	</script>
+</body>
+</html>

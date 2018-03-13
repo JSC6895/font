@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<body>
+	<div id="box">
+		<ul>
+			<li><a v-link="{path:home}"></a></li>
+		</ul>
+		<ul>
+			<li><a v-link="{path:news}"></a></li>
+		</ul>
+	</div>
+	<div>
+		<route-view></route-view>
+	</div>
+	<script>
+		var App = Vue.extend();
+
+		var Home = Vue.extend({
+			template:'<h3>sss</h3>'
+		});
+		var News = Vue.extend({
+			template:"<h3>我是和</h3>"
+		});
+
+		var router = new VueRouter();
+
+		router.map({
+			'home':{
+				component:Home
+			},
+			'news':{
+				component:News
+			}
+		});
+
+		router.start(App,'#box');
+	</script>
+</body>
+</html>

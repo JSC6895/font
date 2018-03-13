@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="./underscore.js"></script>
+    <script src="./jquery-3.1.1.min.js"></script>
+    <script src="./backbone.js"></script>
+    <script src="./JSON-js/json2.js"></script>
+</head>
+<body>
+<p id="header">header</p>
+<script type="text/javascript">
+    var _obj = {
+        'title':'task1',
+        'description':'description'
+    }
+
+    var ToDoItem = Backbone.Model.extend({
+
+    });
+
+    var toDoItem = new ToDoItem(_obj);
+
+    var ToDoItemView = Backbone.View.extend({
+//        tagName:'li',
+//        className:'item-task',
+//        id:'item1',
+//        attributes:{
+//            style:"color:red;"
+//        }
+
+        /*
+
+         */
+        tagName:'li',
+        id:'tag',
+
+//        el:'#header',
+        render:function(){
+            this.$el.html("<span>"+toDoItem.get('title')+"max</span>");
+            return this;
+        }
+
+    })
+    var toDoItemView = new ToDoItemView({
+        el:'#header'
+    });
+    toDoItemView.render().$el.appendTo($('body'));
+</script>
+</body>
+</html>

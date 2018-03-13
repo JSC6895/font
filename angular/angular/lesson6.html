@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="lesson" ng-controller="MainCtrl">
+<head>
+	<meta charset="UTF-8">
+	<title>点赞</title>
+	<style>
+		ul > li:{
+			list-style: none;
+		}
+	</style>
+</head>
+<body>
+	<ul>
+		<li ng-repeat="userTitle in UserTitleList">
+			<lable>{{userTitle.UserName}}</lable><br/>
+			<h4>{{userTitle.Title}}</h4><span>{{userTitle.LikeAmount}}</span><like content="userTitle"></like><br/>
+			<label>{{userTitle.Time}}</label>
+			<ul>
+				<li ng-repeat="text in userTitle.LikeList">
+					<b>{{text.Text}}</b>
+				</li>
+			</ul>
+		</li>
+	</ul>
+	<script src="scripts/angular-1.4.6.min.js"></script>
+	<script>
+	var app = angular.module("lesson",[]);
+	app.controller('MainCtrl',function($scope){
+
+		$scope.UserTitleList = [
+			{UserName:'Tom',Title:'今天天气不好',Time:'2018-01-21',LikeAmount:0,LikeList:[]},
+			{UserName:'Tom',Title:'今天要去打篮球',Time:'2018-01-22',LikeAmount:0,LikeList:[]},
+			{UserName:'Tom',Title:'今天下雨',Time:'2018-01-23',LikeAmount:0,LikeList:[]},
+			{UserName:'Tom',Title:'今天去上海',Time:'2018-01-24',LikeAmount:0,LikeList:[]},
+			{UserName:'Tom',Title:'今天回家',Time:'2018-01-25',LikeAmount:0,LikeList:[]},
+		]
+
+	});
+	</script>
+	<script>
+	app.directive("like",function(){
+		var direction = {};
+		direction.restrict = 'AE';
+		direction.template = '<button ng-click="Like()">赞</button>';
+		direction.scope = {
+			content:'='
+		}
+		direction.link = function($scope,element){
+			$scope.Like = function(){
+				$scope.content.LikeAmount = $scope.content.LikeAmount + 1;
+				$scope.content.LikeList.push({Text:'cheng点了赞'});
+			};
+		};
+		
+		return direction;
+	})
+	</script>
+</body>
+</html>
