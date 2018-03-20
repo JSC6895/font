@@ -20,3 +20,9 @@ $ nm xx.c //显示函数
 netstat an | grep 8080 //查看8080端口是否被监听
 ```
 
+设置软链接权限
+
+```bash
+$ setfacl -m u:www:rwx -R web/
+```
+
