@@ -6,3 +6,8 @@
  -A INPUT -p tcp --dport 80 -i eth0 -m state --state NEW -m recent --update --seconds 60 --hitcount 150  -j DROP #当一分钟内请求高达150则禁止
  COMMIT
  ```
+ ### 启动ufw防火墙
+ ```bash
+ $ ufw status #查看状态
+ $ ufw enable #开启
+ ```
