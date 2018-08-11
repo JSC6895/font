@@ -1,0 +1,8 @@
+ ### iptable.up.rule规则创建
+ #### 新建一个iptables.up.rul文本
+ ```bash
+ #
+ -A INPUT -p icp --dport 80 -i eth0 -m state --state NEW -m recent --set
+ -A INPUT -p tcp --dport 80 -i eth0 -m state --state NEW -m recent --update --seconds 60 --hitcount 150  -j DROP #当一分钟内请求高达150则禁止
+ COMMIT
+ ```
