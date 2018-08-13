@@ -2,8 +2,13 @@
  #### 新建一个iptables.up.rul文本
  ```bash
  #
+ 
  -A INPUT -p icp --dport 80 -i eth0 -m state --state NEW -m recent --set
  -A INPUT -p tcp --dport 80 -i eth0 -m state --state NEW -m recent --update --seconds 60 --hitcount 150  -j DROP #当一分钟内请求高达150则禁止
+ 
+ # 转发本地端口的
+ -A INPUT -s 127.0.0.1 -p tcp --destination-port 3001 -m state --state NEW,ESTABLISHED -j ACCEPT
+ -A INPUT -d 127.0.0.1 -p tcp --source-port 3001 -m state --state ESRABLISHED -j ACCEPT
  COMMIT
  ```
  ### 启动ufw防火墙
