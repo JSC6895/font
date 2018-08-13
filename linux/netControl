@@ -11,6 +11,16 @@
  -A INPUT -d 127.0.0.1 -p tcp --source-port 3001 -m state --state ESRABLISHED -j ACCEPT
  COMMIT
  ```
+
+###iptables操作
+-L:查看规则
+-F:禁掉规则
+-t nat -L: 查看规则
+-t nat -F: 自动禁掉已有规则
+
+###centos 关闭selinux
+getenforce:查看是否开启
+setenforce 0:关闭
  ### 启动ufw防火墙
  ```bash
  $ ufw status #查看状态
