@@ -7,4 +7,6 @@ app.get("/",function(req,res,next){ //next用于放行
   count++;
   next()
 })
+app.use(express.static("public")); //静态化一个文件夹
+
 ```
