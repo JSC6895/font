@@ -28,3 +28,7 @@ module.exports = {
   watch:true
 }
 ```
+###写react程序
+```bash
+cnpm install --save-dev react react-dom
+```
