@@ -5,7 +5,7 @@ cnpm install --save-dev babel-preset-env babel-preset-react
 ```
 
 
-####webpack.config.js
+#### webpack.config.js
 ```javascript
 var path = require("path");
 
@@ -28,7 +28,7 @@ module.exports = {
   watch:true
 }
 ```
-###写react程序
+### 写react程序
 ```bash
 cnpm install --save-dev react react-dom
 ```
