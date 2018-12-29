@@ -46,3 +46,11 @@ nohup ./startWebLogic.sh  >  app.log    2>&1     &
 2>&1 表示不仅命令行正常的输出保存到app.log中，产生错误信息的输出也保存到app.log文件中；
 
 & 表示该进程在后台运行；
+
+
+## 命令行打印
+使用“awk”命令打印输出
+```bash
+xxxx | awk '{print $1}' //打印输出的第一列
+xxxx | awk 'NR!=1 {print $1}' //打印第一列非第一行的数据
+```
