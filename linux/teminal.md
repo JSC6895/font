@@ -27,6 +27,7 @@ $ setfacl -m u:www:rwx -R web/
 ```
 
 =======
+```bash
 $ chattr -i 目录 //表示使原先不能修改删除文件可以
 ```
 
