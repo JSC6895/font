@@ -18,3 +18,9 @@ WORKDIR ~/ #与cd命令类似
 EXPOSE 80 #暴露的端口
 CMD ["/bin/echo","this is running"]#容器开启后执行
 ```
+
+
+### Docker命令（mysql）
+```bash
+ docker run -it --link some-mysql:mysql --rm mysql sh -c 'exec mysql -h"$MYSQL_PORT_3306_TCP_ADDR" -P"$MYSQL_PORT_3306_TCP_PORT" -uroot -p"$MYSQL_ENV_MYSQL_ROOT_PASSWORD"' //some-mysql为原先开启的容器
+```
