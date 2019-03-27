@@ -18,6 +18,7 @@ $ nm xx.c //显示函数
 
 ```bash
 netstat an | grep 8080 //查看8080端口是否被监听
+lsof -i | grep *** //查看占用***端口的进程号
 ```
 
 设置软链接权限
@@ -266,3 +267,5 @@ mysql        199
 root           374 
 统计/home目录下不同用户的普通文件的大小总size是多少？
 ls -l|awk 'NR!=1 && !/^d/{sum[$3]+=$5} END{for (i in sum) printf "%-6s %-5s %-3s %-2s \n",i," ",sum[i]/1024/1024,"MB"}
+
+###
