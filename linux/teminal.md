@@ -268,4 +268,8 @@ root           374
 统计/home目录下不同用户的普通文件的大小总size是多少？
 ls -l|awk 'NR!=1 && !/^d/{sum[$3]+=$5} END{for (i in sum) printf "%-6s %-5s %-3s %-2s \n",i," ",sum[i]/1024/1024,"MB"}
 
-###
+### 查看进程的命名空间
+```bash
+$ ls -l /proc/$$/ns 
+// $$代表当前进程的id号 显示的数字表示当前进程指向的namespace
+```

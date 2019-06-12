@@ -41,3 +41,9 @@ const跟#defined的区别
 c解决命名重复的问题
 
 加static修饰符
+
+
+## C++ note
+基类有虚函数
+用派生类实例化基类，派生类析构函数调用不了，要在基类声明虚析构函数
+![example_1](./img/example_1.png)
